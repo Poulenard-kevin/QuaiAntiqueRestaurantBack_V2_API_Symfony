@@ -27,7 +27,7 @@ class Picture
 
     #[ORM\ManyToOne(inversedBy: 'pictures')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Restaurant $Restaurant = null;
+    private ?Restaurant $restaurant = null;
 
     public function getId(): ?int
     {
@@ -84,12 +84,12 @@ class Picture
 
     public function getRestaurant(): ?Restaurant
     {
-        return $this->Restaurant;
+        return $this->restaurant;
     }
 
-    public function setRestaurant(?Restaurant $Restaurant): static
+    public function setRestaurant(?Restaurant $restaurant): static
     {
-        $this->Restaurant = $Restaurant;
+        $this->restaurant = $restaurant;
 
         return $this;
     }

@@ -19,7 +19,7 @@ class Restaurant
     #[ORM\Column(length: 32)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::ARRAY)]
@@ -28,7 +28,7 @@ class Restaurant
     #[ORM\Column(type: Types::ARRAY)]
     private array $pmOpeningTime = [];
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $maxGuest = null;
 
     #[ORM\Column]
@@ -37,7 +37,7 @@ class Restaurant
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'Restaurant', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'restaurant', orphanRemoval: true)]
     private Collection $pictures;
 
     public function __construct()
@@ -67,7 +67,7 @@ class Restaurant
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -155,7 +155,6 @@ class Restaurant
     public function removePicture(Picture $picture): static
     {
         if ($this->pictures->removeElement($picture)) {
-            // set the owning side to null (unless already changed)
             if ($picture->getRestaurant() === $this) {
                 $picture->setRestaurant(null);
             }
