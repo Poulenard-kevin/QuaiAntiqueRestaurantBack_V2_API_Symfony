@@ -56,7 +56,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $guestNumber = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['user:read'])]
     private ?string $allergy = null;
 
     /** @throws Exception  */
